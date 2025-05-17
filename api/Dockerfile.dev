@@ -2,28 +2,14 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install dependencies
-RUN pip install --no-cache-dir uv
-RUN uv venv /app/.venv
-
-# Copy pyproject.toml, uv.lock, and README.md
-COPY pyproject.toml uv.lock* README.md ./
-
-# Copy the source code
-COPY src/ ./src/
-
-# Activate environment and install dependencies
-RUN . /app/.venv/bin/activate && \
-    uv pip install -e .
-
-# Copy the rest of the application
-COPY . .
-
 # Expose the port FastAPI runs on
 EXPOSE 8000
 
 # Set environment variables
 ENV PYTHONPATH=/app
 
+# Copy the application
+COPY . .
+
 # Command to run when the container starts
-CMD ["/app/.venv/bin/uvicorn", "address_mapper_api.upload_image:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["./entrypoint.sh"]

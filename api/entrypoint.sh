@@ -1,15 +1,14 @@
 #!/bin/bash
 set -e
 
-# Create virtual environment if it doesn't exist
-if [ ! -d "/app/.venv" ]; then
-  echo "Creating virtual environment..."
-  uv venv /app/.venv
-fi
+# Create virtual environment directly at each startup
+echo "Creating virtual environment..."
+python -m venv /app/.venv
 
 # Install dependencies
 echo "Installing dependencies..."
 . /app/.venv/bin/activate
+pip install uv
 uv pip install -e .
 
 # Run the server
