@@ -1,16 +1,11 @@
 #!/bin/bash
 set -e
 
-# Create virtual environment directly at each startup
-echo "Creating virtual environment..."
-python -m venv /app/.venv
-
-# Install dependencies
+# Install dependencies directly without virtual environment
 echo "Installing dependencies..."
-. /app/.venv/bin/activate
-pip install uv
-uv pip install -e .
+pip install --no-cache-dir -e .
+pip install --no-cache-dir uvicorn
 
 # Run the server
 echo "Starting server..."
-exec /app/.venv/bin/uvicorn address_mapper_api.upload_image:app --reload --host 0.0.0.0 --port 8000
+exec uvicorn address_mapper_api.upload_image:app --reload --host 0.0.0.0 --port 8000
