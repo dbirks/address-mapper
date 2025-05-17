@@ -9,6 +9,9 @@ RUN uv venv /app/.venv
 # Copy pyproject.toml and uv.lock
 COPY pyproject.toml uv.lock* ./
 
+# Copy the source code
+COPY src/ ./src/
+
 # Activate environment and install dependencies
 RUN . /app/.venv/bin/activate && \
     uv pip install -e .
