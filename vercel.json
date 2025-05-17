@@ -9,11 +9,5 @@
     "api/*.py": {
       "runtime": "python3.11"
     }
-  },
-  "env": {
-    "OPENAI_API_KEY": "@openai_api_key",
-    "MAPBOX_API_KEY": "@mapbox_api_key",
-    "VITE_MAPBOX_TOKEN": "@vite_mapbox_token",
-    "VITE_API_URL": "@vite_api_url"
   }
 }
