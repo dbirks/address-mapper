@@ -102,11 +102,45 @@ The frontend will be available at http://localhost:5173 and the API at http://lo
 
 ## Deployment
 
-This project is configured for deployment on Vercel using the provided `vercel.json` configuration.
+### Deploying to Vercel
 
-1. Connect your GitHub repository to Vercel
-2. Add the required environment variables in the Vercel dashboard
-3. Deploy the application
+This project is configured for deployment on Vercel using the provided `vercel.json` configuration. The configuration handles both the frontend React application and the FastAPI backend.
+
+1. **Connect your GitHub repository to Vercel**
+   - Go to [vercel.com](https://vercel.com) and sign in
+   - Create a new project and import your GitHub repository
+   - Select the "Address Mapper" repository
+
+2. **Configure Environment Variables**
+   - Add the following environment variables in the Vercel dashboard:
+     - `OPENAI_API_KEY`: Your OpenAI API key
+     - `MAPBOX_API_KEY`: Your Mapbox API key for geocoding
+     - `VITE_MAPBOX_TOKEN`: Your public Mapbox GL JS token
+     - `VITE_API_URL`: Set to `/api` for production deployment
+
+3. **Deploy**
+   - Click "Deploy" to start the deployment process
+   - Vercel will automatically:
+     - Install dependencies for both frontend and backend
+     - Build the React frontend with Vite
+     - Set up the FastAPI backend with Python
+     - Configure routing for API requests
+
+4. **Verify Deployment**
+   - Once deployed, you can access your application at the provided Vercel URL
+   - Test both the frontend UI and the API endpoints
+
+### Troubleshooting Deployment
+
+If you encounter issues with the deployment:
+
+1. **Check build logs** in the Vercel dashboard for errors
+2. **Verify environment variables** are correctly set
+3. **Test the build locally** using the provided build script:
+   ```bash
+   ./build.sh
+   ```
+4. **Check API routing** by accessing `/api/health` endpoint
 
 ## License
 
