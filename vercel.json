@@ -1,24 +1,15 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "cd frontend && pnpm install && pnpm build",
   "outputDirectory": "frontend/dist",
   "framework": "vite",
-  "builds": [
-    {
-      "src": "api/*.py",
-      "use": "@vercel/python"
-    },
-    {
-      "src": "frontend/**/*",
-      "use": "@vercel/static-build"
+  "rewrites": [
+    { "source": "/api/upload-image", "destination": "/api/upload_image.py" },
+    { "source": "/api/health", "destination": "/api/upload_image.py" }
+  ],
+  "functions": {
+    "api/*.py": {
+      "runtime": "@vercel/python"
     }
-  ],
-  "routes": [
-    { "src": "/api/upload-image", "dest": "/api/upload_image.py" },
-    { "src": "/api/health", "dest": "/api/upload_image.py" },
-    { "src": "/(.*)", "dest": "/frontend/dist/$1" }
-  ],
-  "env": {
-    "OPENAI_API_KEY": "@openai-api-key",
-    "MAPBOX_API_KEY": "@mapbox-api-key"
   }
 }
