@@ -111,3 +111,6 @@ This project is configured for deployment on Vercel using the provided `vercel.j
 ## License
 
 MIT
+# Create a .env file with your API keys
+cp .env.example .env
+# Then edit the .env file with your actual API keys
