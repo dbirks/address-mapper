@@ -1,0 +1,31 @@
+[project]
+name = "address-mapper-api"
+version = "0.1.0"
+description = "FastAPI backend for address mapping application"
+readme = "README.md"
+requires-python = "~=3.9"
+dependencies = [
+    "fastapi>=0.95.0",
+    "uvicorn>=0.22.0",
+    "python-multipart>=0.0.5",
+    "openai>=1.1.1",
+    "httpx>=0.24.0", # For making HTTP requests to geocoding API
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.0.292",
+]
+
+[build-system]
+requires = ["uv_build>=0.7.3,<0.8"]
+build-backend = "uv_build"
+
+[project.scripts]
+api = "address_mapper_api.upload_image:app"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+extend-select = ["I"] # Auto-sort imports
