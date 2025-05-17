@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm i -g pnpm && cd ui && pnpm config set registry https://registry.npmjs.org/ && pnpm install --no-frozen-lockfile && pnpm exec vite build && cd ../api && uv pip install -e .",
+  "buildCommand": "chmod +x ./build.sh && ./build.sh",
   "outputDirectory": "ui/dist",
   "framework": "vite",
   "rewrites": [

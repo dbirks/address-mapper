@@ -1,19 +1,38 @@
 #!/bin/bash
-# This script simulates the Vercel build process locally
+# Enhanced build script for Vercel deployment
 
+# Exit on error, but with detailed logging
 set -e
 
-echo "Installing frontend dependencies..."
-cd ui
-pnpm install
-echo "Building frontend with type checks skipped..."
-# Skip type checking to work around type issues
-pnpm exec vite build
-echo "Frontend build complete!"
+echo "==== ADDRESS MAPPER BUILD SCRIPT ===="
+echo "Current directory: $(pwd)"
+echo "Node version: $(node -v)"
+echo "NPM version: $(npm -v)"
 
-echo "Installing backend dependencies..."
-cd ../api
-uv pip install -e .
-echo "Backend setup complete!"
+# Setup frontend
+echo "==== FRONTEND BUILD ===="
+echo "Entering frontend directory..."
+cd ui || { echo "Failed to enter ui directory"; exit 1; }
+echo "Current directory: $(pwd)"
 
-echo "Build completed successfully!"
+echo "Installing npm dependencies..."
+npm install || { echo "Failed to install npm dependencies"; exit 1; }
+
+echo "Building frontend..."
+npm run build || { echo "Failed to build frontend"; exit 1; }
+echo "Frontend build completed successfully!"
+
+# Setup backend
+echo "==== BACKEND BUILD ===="
+echo "Entering backend directory..."
+cd ../api || { echo "Failed to enter api directory"; exit 1; }
+echo "Current directory: $(pwd)"
+
+echo "Installing Python dependencies..."
+pip install -e . || { echo "Failed to install Python dependencies"; exit 1; }
+echo "Backend setup completed successfully!"
+
+echo "==== BUILD COMPLETED SUCCESSFULLY ===="
+cd ..
+echo "Final build directory structure:"
+find ui/dist -type f | sort
