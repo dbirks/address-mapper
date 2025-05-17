@@ -3,3 +3,4 @@ dist
 .env
 .venv
 .claude
+__pycache__
