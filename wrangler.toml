@@ -1,0 +1,3 @@
+name = "address-mapper-api"
+main = "api/main.py"
+compatibility_date = "2025-06-10"
