@@ -20,6 +20,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Docker
 - **Run full stack**: `docker compose up` (API on :8000, UI on :3000)
 
+### Task Runner
+- **Install Task**: https://taskfile.dev/installation/
+- **Common tasks**: `task --list` to see all available tasks
+- **Quick dev**: `task dev` (starts both API and UI)
+- **Format all**: `task format`
+- **Test all**: `task test`
+
 ## Architecture
 
 This is a full-stack address extraction application with two main components:
@@ -54,3 +61,8 @@ This is a full-stack address extraction application with two main components:
 - **Python**: Use ruff for formatting and linting (configured in pyproject.toml)
 - **TypeScript/React**: Use Biome for formatting and linting (configured in biome.jsonc)
 - **Testing**: pytest for Python unit tests (see api/tests/)
+
+## Development Workflow
+- **Commit frequently**: Make small, focused commits with clear messages
+- **Run tests before committing**: Use `task test` or individual test commands
+- **Format code before committing**: Use `task format` to ensure consistent style

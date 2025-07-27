@@ -1,0 +1,69 @@
+version: '3'
+
+tasks:
+  # API tasks
+  api:dev:
+    desc: "Run API development server"
+    dir: api
+    cmd: python main.py
+
+  api:format:
+    desc: "Format API code with ruff"
+    dir: api
+    cmd: uvx ruff format
+
+  api:lint:
+    desc: "Lint API code with ruff"
+    dir: api
+    cmd: uvx ruff check
+
+  api:test:
+    desc: "Run API tests"
+    cmd: pytest
+
+  # UI tasks
+  ui:dev:
+    desc: "Run UI development server"
+    dir: ui
+    cmd: pnpm dev
+
+  ui:build:
+    desc: "Build UI for production"
+    dir: ui
+    cmd: pnpm build
+
+  ui:install:
+    desc: "Install UI dependencies"
+    dir: ui
+    cmd: pnpm install
+
+  ui:format:
+    desc: "Format and lint UI code with Biome"
+    dir: ui
+    cmd: npx @biomejs/biome check --write .
+
+  # Docker tasks
+  docker:up:
+    desc: "Start full stack with Docker Compose"
+    cmd: docker compose up
+
+  docker:down:
+    desc: "Stop Docker Compose services"
+    cmd: docker compose down
+
+  # Development workflow tasks
+  dev:
+    desc: "Start both API and UI development servers"
+    deps: [api:dev, ui:dev]
+
+  format:
+    desc: "Format all code (API and UI)"
+    deps: [api:format, ui:format]
+
+  lint:
+    desc: "Lint all code (API and UI)"
+    deps: [api:lint, ui:format]
+
+  test:
+    desc: "Run all tests and checks"
+    deps: [api:test, ui:format]
